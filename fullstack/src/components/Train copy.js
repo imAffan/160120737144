@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import TrainDepartureTime from './TrainDepartureTime.js';
-
-export default function Train() {
- // Replace this with the actual departure time data
- const departureTime = {
+ 
+export default Train = () => {
+  // Replace this with the actual departure time data
+  const departureTime = {
     Hours: 21,
     Minutes: 35,
     Seconds: 0
@@ -15,4 +15,7 @@ export default function Train() {
       <TrainDepartureTime departureTime={departureTime} />
     </div>
   );
-}
+};
+
+
+ 

@@ -4,6 +4,7 @@ const express = require('express');
 
 const app = express();
 app.use(cors())
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
@@ -28,12 +29,12 @@ app.get('/', (req, res) => {
      
 };
   
-app.get('/register', (req, res) => {
+app.post('/register', async (req, res) => {
      
-
+ console.log(req.body)
 
   // Send the POST request to the API
-  axios.post(apiUrl, requestBody)
+  await axios.post(apiUrl, req.body || requestBody )
     .then((response) => {
       // Handle the response from the API
       console.log('Response:', response.data);
@@ -41,7 +42,7 @@ app.get('/register', (req, res) => {
     })
     .catch((error) => {
       // Handle any errors that occurred during the request
-      console.error('Error:', error.message);
+      console.error('Error:', error.response.data);
     });
 });
 

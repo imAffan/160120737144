@@ -8,11 +8,10 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-//import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -31,34 +30,24 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function LogIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      ownerEmail: data.get('email'),
-      accessCode: data.get('accessCode'),
-      companyName:data.get('companyName'),
-      ownerName:data.get('ownerName'),
-      rollNo:data.get('rollNo'),
+        ownerEmail: data.get('email'),
+        clientID: data.get('clientID'),
+        companyName:data.get('companyName'),
+        ownerName:data.get('ownerName'),
+        rollNo:data.get('rollNo'),
+        clientSecret:data.get('password')
     });
-    const register = async () => {
-        try {
-            const body = {
-                ownerEmail: data.get('email'),
-                accessCode: data.get('accessCode'),
-                companyName:data.get('companyName'),
-                ownerName:data.get('ownerName'),
-                rollNo:data.get('rollNo'),
-              }
-            const res = await axios.post('http://localhost:9000/register', body)
-            console.log(res.data)
-            localStorage.setItem("userData",JSON.stringify(res.data))
-        } catch (error) {
-            console.log(error)
-        }
+    const login = async () => {
+    const res = await axios.post('http://20.244.56.144/train/auth', body)
+    console.log(res.data)
+    localStorage.setItem("userData",JSON.stringify(res.data))
     }
-     register();
+    login()
   };
 
   return (
@@ -74,7 +63,7 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -87,58 +76,48 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-             // autoComplete="email"
+              autoComplete="email"
               autoFocus
             />
-
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="clientID"
+              label="Password"
+              type="text"
+              id="clientID"
+             // autoComplete="current-password"
+            />
              <TextField
               margin="normal"
               required
               fullWidth
-              id="companyName"
-              label="companyName"
-              name="companyName"
-             // autoComplete="email"
-
-
-              autoFocus
-            />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="ownerName"
-              label="ownerName"
               name="ownerName"
-             // autoComplete="email"
-
-
-              autoFocus
+              label="ownerName"
+              type="text"
+              id="clientID"
+             // autoComplete="current-password"
             />
-              <TextField
+             <TextField
               margin="normal"
               required
               fullWidth
-              id="rollNo"
-              label="rollNo"
               name="rollNo"
-              //autoComplete="email"
-
-
-              autoFocus
-            />
-             
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="accessCode"
-              label="accessCode"
-              type="password"
-              id="accessCode"
-              //autoComplete="current-password"
+              label="rollNo"
+              type="text"
+              id="rollNo"
+             // autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
