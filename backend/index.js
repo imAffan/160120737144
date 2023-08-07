@@ -14,26 +14,36 @@ app.get('/', (req, res) => {
 
 
 // Replace this URL with the actual API endpoint you want to send the request to
-  const apiUrl = 'http://example.com/api/endpoint';
+  const apiUrl = 'http://20.244.56.144/train/register';
   
   // Data to be sent in the request body
-  
-  const requestBody = {
-    companyName: 'John Doe'
+
+  const requestBody =  
+    {
+   "companyName": "TrainGuy",
+"ownerName": "Ram",
+"rollNo": "160120737",
+"ownerEmail": "ram@abc.edu",
+"accessCode": "rdxwKw"
      
-  };
+};
   
+app.get('/register', (req, res) => {
+     
+
+
   // Send the POST request to the API
   axios.post(apiUrl, requestBody)
     .then((response) => {
       // Handle the response from the API
       console.log('Response:', response.data);
+      res.send(response.data)
     })
     .catch((error) => {
       // Handle any errors that occurred during the request
       console.error('Error:', error.message);
     });
-  
+});
 
 
 const port = 9000; // You can use any available port number
